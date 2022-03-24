@@ -1,0 +1,27 @@
+communities
+-
+community_area int PK
+neighborhood text PK
+
+
+listing
+-
+id int PK
+host_id int
+host_name text
+room_type text
+price money
+minimum_nights int
+number_of_reviews int
+last_review date
+reviews_per_month float
+calculated_host_listings_count int
+availability_365 int
+
+airbnb_loc
+-
+id int PK FK - listing.id
+address text
+neighborhood text FK >- communities.neighborhood
+latitude float
+longitude float
