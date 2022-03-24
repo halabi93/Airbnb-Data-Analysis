@@ -1,5 +1,47 @@
-CREATE TABLE communities (
-  community_area INT PRIMARY KEY NOT NULL,
-  name TEXT NOT NULL,
+DROP TABLE IF EXISTS "communities" CASCADE;
+DROP TABLE IF EXISTS "listing" CASCADE;
+DROP TABLE IF EXISTS "airbnb_loc" CASCADE;
 
+
+CREATE TABLE "communities" (
+    "community_area" int   NOT NULL,
+    "neighborhood" text   NOT NULL,
+    CONSTRAINT "pk_communities" PRIMARY KEY (
+        "community_area","neighborhood"
+     )
 );
+
+CREATE TABLE "listing" (
+    "id" int   NOT NULL,
+    "host_id" int   NOT NULL,
+    "host_name" text   NOT NULL,
+    "room_type" text   NOT NULL,
+    "price" money   NOT NULL,
+    "minimum_nights" int   NOT NULL,
+    "number_of_reviews" int   NOT NULL,
+    "last_review" date   NOT NULL,
+    "reviews_per_month" float   NOT NULL,
+    "calculated_host_listings_count" int   NOT NULL,
+    "availability_365" int   NOT NULL,
+    CONSTRAINT "pk_listing" PRIMARY KEY (
+        "id"
+     )
+);
+
+CREATE TABLE "airbnb_loc" (
+    "id" int   NOT NULL,
+    "address" text   NOT NULL,
+    "neighborhood" text   NOT NULL,
+    "latitude" float   NOT NULL,
+    "longitude" float   NOT NULL,
+    CONSTRAINT "pk_airbnb_loc" PRIMARY KEY (
+        "id"
+     )
+);
+
+ALTER TABLE "airbnb_loc" ADD CONSTRAINT "fk_airbnb_loc_id" FOREIGN KEY("id")
+REFERENCES "listing" ("id");
+
+ALTER TABLE "airbnb_loc" ADD CONSTRAINT "fk_airbnb_loc_neighborhood" FOREIGN KEY("neighborhood")
+REFERENCES "communities" ("neighborhood");
+
