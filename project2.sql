@@ -4,12 +4,13 @@ DROP TABLE IF EXISTS airbnb_loc CASCADE;
 
 
 CREATE TABLE communities (
-    community_area int,
-    neighborhood varchar(30) PRIMARY KEY
+    community_area serial,
+    neighborhood varchar(30),
+	PRIMARY KEY(neighborhood)
 );
 
 CREATE TABLE listing (
-    "id" int PRIMARY KEY,
+    "id" int PRIMARY KEY NOT NULL,
     host_id int NOT NULL,
     host_name text NOT NULL,
     room_type text NOT NULL,
@@ -23,13 +24,20 @@ CREATE TABLE listing (
 );
 
 CREATE TABLE airbnb_loc (
-    "id" int PRIMARY KEY,
+    "id" int PRIMARY KEY NOT NULL,
     address text   NOT NULL,
-    neighborhood text   NOT NULL,
+    neighborhood varchar(30)  NOT NULL,
     latitude float   NOT NULL,
-    longitude float   NOT NULL,
-	FOREIGN KEY ("id") REFERENCES listing("id"),
-	FOREIGN KEY (neighborhood) REFERENCES communities(neighborhood)
+    longitude float   NOT NULL
 );
 
+ALTER TABLE "airbnb_loc" ADD CONSTRAINT "fk_airbnb_loc_id" FOREIGN KEY("id")
+REFERENCES "listing" ("id");
 
+ALTER TABLE "airbnb_loc" ADD CONSTRAINT "fk_airbnb_loc_neighborhood" FOREIGN KEY("neighborhood")
+REFERENCES "communities" 
+
+	
+select * from communities
+select * from listing
+select * from airbnb_loc
