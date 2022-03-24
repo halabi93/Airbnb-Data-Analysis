@@ -1,6 +1,6 @@
 communities
 -
-community_area int PK
+community_area int
 neighborhood text PK
 
 
