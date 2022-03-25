@@ -4,8 +4,8 @@ DROP TABLE IF EXISTS airbnb_loc CASCADE;
 DROP TABLE IF EXISTS population CASCADE;
 
 CREATE TABLE communities (
-    community_area serial,
-    neighborhood varchar(30),
+    community_area serial NOT NULL,
+    neighborhood varchar(30) NOT NULL,
 	PRIMARY KEY(neighborhood)
 );
 
@@ -44,14 +44,11 @@ CREATE TABLE population (
 		FOREIGN KEY (neighborhood) REFERENCES communities(neighborhood)
 );
 
-
-
 ALTER TABLE "airbnb_loc" ADD CONSTRAINT "fk_airbnb_loc_id" FOREIGN KEY("id")
 REFERENCES "listing" ("id");
 
 ALTER TABLE "airbnb_loc" ADD CONSTRAINT "fk_airbnb_loc_neighborhood" FOREIGN KEY("neighborhood")
 REFERENCES "communities" 
-
 
 select * from communities
 select * from listing
