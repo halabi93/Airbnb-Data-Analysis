@@ -37,7 +37,7 @@ REFERENCES "listing" ("id");
 ALTER TABLE "airbnb_loc" ADD CONSTRAINT "fk_airbnb_loc_neighborhood" FOREIGN KEY("neighborhood")
 REFERENCES "communities" 
 
-	
+
 select * from communities
 select * from listing
 select * from airbnb_loc
