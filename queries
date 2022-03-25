@@ -1,0 +1,32 @@
+select * from communities;
+select * from listing;
+select * from airbnb_loc;
+select * from population;
+
+--Number of listings per neighborhood
+select neighborhood, count(neighborhood) as listing_count
+from airbnb_loc
+group by neighborhood
+order by count(neighborhood) DESC;
+
+--Simple join
+select population.population, airbnb_loc.neighborhood, airbnb_loc.id as listing_id
+from airbnb_loc
+inner join population
+	on airbnb_loc.neighborhood = population.neighborhood;
+
+--Number of listings, population per neighborhood
+select population.population, airbnb_loc.neighborhood
+from airbnb_loc
+inner join population
+	on airbnb_loc.neighborhood = population.neighborhood
+partition by airbnb_loc.neighborhood;
+
+----Number of "recently" reviewed listings per neighborhood
+select airbnb_loc.neighborhood, count(airbnb_loc.neighborhood) as listing_count
+from airbnb_loc
+inner join listing
+	on
+where date_part('year', listing.last_review) >= 2020
+group by neighborhood
+order by count(neighborhood) DESC;

@@ -32,4 +32,8 @@ CREATE TABLE airbnb_loc (
 	FOREIGN KEY (neighborhood) REFERENCES communities(neighborhood)
 );
 
-
+CREATE TABLE population (
+	community_area int NOT NULL,
+	
+	FOREIGN KEY (community_area) REFERENCES communities(community_area)
+);
