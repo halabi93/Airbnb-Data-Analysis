@@ -1,12 +1,11 @@
 communities
--
-community_area int
-neighborhood text PK
-
+--
+community_area serial
+neighborhood varchar(30) PK
 
 listing
--
-id int PK
+--
+"id" int
 host_id int
 host_name text
 room_type text
@@ -19,9 +18,21 @@ calculated_host_listings_count int
 availability_365 int
 
 airbnb_loc
--
-id int PK FK - listing.id
+--
+"id" int PK FK - listing.id
 address text
-neighborhood text FK >- communities.neighborhood
+neighborhood varchar(30) FK >- communities.neighborhood
 latitude float
 longitude float
+
+population
+--
+community_area serial
+neighborhood varchar(30) FK >- communities.neighborhood
+population int
+income money
+latinos float
+blacks float
+white float
+asian float
+other float
